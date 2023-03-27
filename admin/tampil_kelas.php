@@ -1,6 +1,5 @@
 <?php
-//memanggil file koneksi.php untuk melakukan koneksi database
-include 'koneksi.php'; 
+include '../koneksi.php'; 
  ?>
 
  <!DOCTYPE html>
@@ -24,29 +23,28 @@ include 'koneksi.php';
  		<tr>
  			<th>No</th>
  			<th>Id Kelas</th>
- 			<th>kelas</th>
+ 			<th>Kelas</th>
  			<th>Jurusan</th>
  			<th>AKSI</th>
  		</tr>
  	<?php
- 	//jalankan query untuk menampilkan semua data diurutkan berdasarkan....
- 	$query = "SELECT * FROM kelas ORDER BY id_kelas ASC"; //ASC adalah kebalikan dari kecil ke besar
- 	$result = mysqli_query($koneksi, $query);
- 	//mengecek apakah ada error ketika menjalankan query
+ 
+ 	$query = "SELECT * FROM kelas ORDER BY id_kelas ASC";
+ 	$result = mysqli_query($link, $query);
+ 
  	if (!$result) {
- 		die("Query Error: ".mysqli_errno($koneksi).
- 			"-".mysqli_error($koneksi));
+ 		die("Query Error: ".mysqli_errno($link).
+ 			"-".mysqli_error($link));
  	}
 
- 	//buat perulangan untuk element tabel dari data mahasiswa
- 	$no = 1; //variabel untuk memmbuat nomor urut 
- 	//hasil query akan disimpan dalam variabel $data dalam bentuk.....
- 	//kemudian dicetak dengfan perulangan while
+ 
+ 	$no = 1;
+ 
  	while ($data = mysqli_fetch_assoc($result)) 
  	{
- 	//mencetak /menampilakn data
+
  		echo "<tr>";
- 		echo "<td>$no</td>"; //menampilkan no urut
+ 		echo "<td>$no</td>";
  		echo "<td>$data[id_kelas]</td>";
  		echo "<td>$data[kelas]</td>";
  		echo "<td>$data[jurusan]</td>";
@@ -57,7 +55,7 @@ include 'koneksi.php';
   		onclick="return confirm(\'Anda yakin akan menghapus data?\')">Hapus</a>
   		</td>';
   		echo "</tr>";
-  		$no++; //menambah nilai urut
+  		$no++;
  	}
  	?>
  	</table>

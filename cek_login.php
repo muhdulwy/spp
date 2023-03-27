@@ -22,7 +22,6 @@ function test_input($data) {
 $query = sprintf("SELECT * FROM user WHERE username = '%s' and password = '%s'",
     mysqli_real_escape_string($link, $username), mysqli_real_escape_string($link, $password));
 
-	die ( $query );
 
 	$login = mysqli_query($link, $query);
 
